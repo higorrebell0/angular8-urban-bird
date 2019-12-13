@@ -4,12 +4,20 @@ import { Offer } from './shared/offer.model';
 
 @Injectable()
 export class OffersService {
+  private SERVER_URL = 'http://localhost:3000/ofertas';
+  private offers;
 
   constructor(private http: HttpClient) { }
 
   public getOffers(): Promise<Array<Offer>> {
     // make a http request and return a promise Array<Offer>
-    return this.http.get('http://localhost:3000/ofertas')
+    return this.http.get(this.SERVER_URL)
+      .toPromise()
+      .then((response: any) => response );
+  }
+
+  public getOffersByCategory(category: string): Promise<Array<Offer>> {
+    return this.http.get(this.SERVER_URL + `?category=${category}`)
       .toPromise()
       .then((response: any) => response );
   }

@@ -2,7 +2,7 @@
 	"ofertas": [
 		{
 			"id": 1,
-			"catrgory": "restaurante",
+			"category": "restaurants",
 			"title": "Super Burger",
 			"description": "Rodízio de Mini-hambúrger com opção de entrada.",
 			"advertiser": "Original Burger",
@@ -17,7 +17,7 @@
 		},
 		{
 			"id": 2,
-			"categoria": "restaurante",
+			"category": "restaurants",
 			"title": "Cozinha Mexicana",
 			"description": "Almoço ou Jantar com Rodízio Mexicano delicioso.",
 			"advertiser": "Mexicana",
@@ -32,7 +32,7 @@
 		},
 		{
 			"id": 3,
-			"categoria": "restaurante",
+			"category": "restaurants",
 			"title": "Pizzas Grandes",
 			"description": "Pizza Grande, Mussarela, Marguerita ou outras!",
 			"advertiser": "Nossa Pizza",
@@ -47,7 +47,7 @@
 		},
 		{
 			"id": 4,
-			"categoria": "diversao",
+			"category": "fun",
 			"title": "Estância das águas",
 			"description": "Diversão garantida com piscinas, trilhas e muito mais.",
 			"advertiser": "Estância das águas",
@@ -64,7 +64,7 @@
 		},
 		{
 			"id": 5,
-			"categoria": "diversao",
+			"category": "fun",
 			"title": "Kart",
 			"description": "Bateria de Kart de 30 minutos.",
 			"advertiser": "Speed Kart",
@@ -77,7 +77,7 @@
 		},
 		{
 			"id": 6,
-			"categoria": "diversao",
+			"category": "fun",
 			"title": "Academia de tiro",
 			"description": "Sessão de tiro dinâmico com Instrutor, Estande, Alvo e Equipamentos.",
 			"advertiser": "Academia de Tiro",
