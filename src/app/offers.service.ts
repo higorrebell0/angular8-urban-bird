@@ -18,15 +18,27 @@ export class OffersService {
   }
 
   public getOffersByCategory(category: string): Promise<Array<Offer>> {
-    return this.http.get(`${SERVER_URL}?category=${category}`)
+    return this.http.get(`${SERVER_URL}/offers?category=${category}`)
       .toPromise()
       .then((response: any) => response );
   }
 
   public getOfferById(id: number): Promise<Offer> {
-    return this.http.get(`${SERVER_URL}?id=${id}`)
+    return this.http.get(`${SERVER_URL}/offers?id=${id}`)
       .toPromise()
       .then((response: any) => response.shift());
+  }
+
+  public getHowUseId(id: number): Promise<string> {
+    return this.http.get(`${SERVER_URL}/how-use?id=${id}`)
+      .toPromise()
+      .then((response: any) => response.shift().description);
+  }
+
+  public getWhereId(id: number): Promise<string> {
+    return this.http.get(`${SERVER_URL}/where?id=${id}`)
+      .toPromise()
+      .then((response: any) => response.shift().description);
   }
 
   // ---------------------------------------------------------------------------
