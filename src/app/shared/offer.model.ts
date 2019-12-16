@@ -1,3 +1,5 @@
+import { Image } from './image.model';
+
 export class Offer {
   public id: number;
   public category: string;
@@ -6,5 +8,5 @@ export class Offer {
   public advertiser: string;
   public value: number;
   public spotlight: boolean;
-  public images: Array<object>;
+  public images: Array<Image>;
 }

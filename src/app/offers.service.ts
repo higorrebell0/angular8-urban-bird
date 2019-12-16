@@ -2,24 +2,31 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Offer } from './shared/offer.model';
 
+import { SERVER_URL } from './app.api';
+
 @Injectable()
 export class OffersService {
-  private SERVER_URL = 'http://localhost:3000/ofertas';
   private offers;
 
   constructor(private http: HttpClient) { }
 
   public getOffers(): Promise<Array<Offer>> {
     // make a http request and return a promise Array<Offer>
-    return this.http.get(this.SERVER_URL)
+    return this.http.get(SERVER_URL)
       .toPromise()
       .then((response: any) => response );
   }
 
   public getOffersByCategory(category: string): Promise<Array<Offer>> {
-    return this.http.get(this.SERVER_URL + `?category=${category}`)
+    return this.http.get(`${SERVER_URL}?category=${category}`)
       .toPromise()
       .then((response: any) => response );
+  }
+
+  public getOfferById(id: number): Promise<Offer> {
+    return this.http.get(`${SERVER_URL}?id=${id}`)
+      .toPromise()
+      .then((response: any) => response.shift());
   }
 
   // ---------------------------------------------------------------------------
