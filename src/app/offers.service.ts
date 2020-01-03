@@ -12,7 +12,7 @@ export class OffersService {
 
   public getOffers(): Promise<Array<Offer>> {
     // make a http request and return a promise Array<Offer>
-    return this.http.get(SERVER_URL)
+    return this.http.get<Array<Offer>>(`${SERVER_URL}/offers`)
       .toPromise()
       .then((response: any) => response );
   }

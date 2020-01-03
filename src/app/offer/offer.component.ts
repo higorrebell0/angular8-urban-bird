@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OffersService } from '../offers.service';
 import { Offer } from '../shared/offer.model';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-offer',
@@ -10,7 +10,10 @@ import { Observable, Observer } from 'rxjs';
   styleUrls: ['./offer.component.css'],
   providers: [ OffersService ]
 })
-export class OfferComponent implements OnInit {
+export class OfferComponent implements OnInit, OnDestroy {
+
+  private timeObservableSubs: Subscription;
+  private observTestSubs: Subscription;
 
   public offer: Offer;
 
@@ -34,16 +37,29 @@ export class OfferComponent implements OnInit {
     //   () => console.log('processamento foi concluído!')
     // );
 
+    let time = interval(2000);
+    this.timeObservableSubs = time.subscribe((inter: number) => {
+      console.log(inter);
+    });
+
     // observable
-    let observTest = Observable.create(
+    let observTest = new Observable(
       (observer: Observer<any>) => {
         observer.next('Primeiro evento da stream'); // next() trigger an event of the event stream
+        observer.error('algum erro encontrado na stream de eventos');
       }
     );
 
     // observable observer
     observTest.subscribe(
-      (res: any) => console.log(res)
+      (res: any) => console.log(res),
+      (erro: string) => console.log(erro),
+      () => console.log('Stream de eventos foi finalizada')
     );
+  }
+
+  ngOnDestroy() {
+    this.observTestSubs.unsubscribe();
+    this.timeObservableSubs.unsubscribe();
   }
 }
