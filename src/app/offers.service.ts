@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Offer } from './shared/offer.model';
 
 import { SERVER_URL } from './app.api';
+import { Observable } from 'rxjs';
+import { map, retry } from 'rxjs/operators';
 
 @Injectable()
 export class OffersService {
@@ -40,6 +42,19 @@ export class OffersService {
       .toPromise()
       .then((response: any) => response.shift().description);
   }
+
+  // observable to work with the search on the header component
+  public searchOffers(searchString: string): Observable<Array<Offer>> {
+    return this.http.get(`${SERVER_URL}/offers?description_like=${searchString}`)
+      .pipe(map((response: any) => response), retry(10)); // transforming the http response in a type that we need (observable<array<offer>>)
+  }
+
+
+
+
+
+
+
 
   // ---------------------------------------------------------------------------
 

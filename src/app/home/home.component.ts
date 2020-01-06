@@ -22,7 +22,6 @@ export class HomeComponent implements OnInit {
         this.offers = data;
       })
       .catch((param: any) => {
-        console.log(param);
       });
   }
 }

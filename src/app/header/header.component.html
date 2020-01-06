@@ -11,7 +11,8 @@
           <input type="text"
             class="form-control"
             placeholder="Search for offers..."
-            (keyup)="search($event)"
+            #searchTerm
+            (keyup)="search(searchTerm.value)"
           />
         </div>
         <div class="col-md-2">
