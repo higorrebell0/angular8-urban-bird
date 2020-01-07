@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { OffersService } from '../offers.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 import { Offer } from '../shared/offer.model';
+import { switchMap, debounceTime, distinctUntilChanged, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -12,21 +13,39 @@ import { Offer } from '../shared/offer.model';
 export class HeaderComponent implements OnInit {
 
   public offers: Observable<Array<Offer>>;
+  public arrayOffers: Array<Offer>;
+  private subjectSearch: Subject<string> = new Subject<string>();
 
   constructor(private service: OffersService) { }
 
   ngOnInit() {
+    this.offers = this.subjectSearch // return array<offer>
+      .pipe(
+        debounceTime(1000),
+        distinctUntilChanged(),
+        switchMap( // switchmap is called when the next of the subject execute
+        (searchTerm: string) => {
+          if (searchTerm.trim() === '') {
+            return of<Array<Offer>>([]);
+          }
+          return this.service.searchOffers(searchTerm);
+        }
+      ),
+      catchError(
+        (err: any) => {
+          console.log(err);
+          return of<Array<Offer>>([]);
+        }
+      )
+    );
+
+    this.offers.subscribe((offers: Array<Offer>) => {
+      this.arrayOffers = offers;
+    });
   }
 
   public search(searchString: string): void {
-    // console.log((event.target as HTMLInputElement).value);
-    // console.log(searchString);
-    this.offers = this.service.searchOffers(searchString);
-    this.offers.subscribe(
-      (response: Array<Offer>) => console.log(response),
-      (erro: any) => console.log('Erro status: ', erro.status),
-      () => console.log('Event stream complete.')
-    );
+    this.subjectSearch.next(searchString);
   }
 
 }
