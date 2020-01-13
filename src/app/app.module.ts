@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 import { RouterModule } from '@angular/router';
 
 import { ROUTES } from './app.routes';
@@ -16,6 +18,9 @@ import { OfferComponent } from './offer/offer.component';
 import { HowUseComponent } from './offer/how-use/how-use.component';
 import { WhereComponent } from './offer/where/where.component';
 
+// pipes
+import { AbbreviateDescription } from '../app/util/abbreviate-desc.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +31,8 @@ import { WhereComponent } from './offer/where/where.component';
     RestaurantsComponent,
     OfferComponent,
     HowUseComponent,
-    WhereComponent
+    WhereComponent,
+    AbbreviateDescription
   ],
   imports: [
     BrowserModule,
@@ -34,7 +40,8 @@ import { WhereComponent } from './offer/where/where.component';
     HttpClientModule,
     RouterModule.forRoot(ROUTES) // forRoot global routes of application - forChild intern routes of components
   ],
-  providers: [],
+  providers: [ { provide: LOCALE_ID, useValue: 'pt' } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+registerLocaleData(localePt);

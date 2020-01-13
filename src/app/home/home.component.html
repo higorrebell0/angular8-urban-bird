@@ -13,7 +13,7 @@
         <div class="card-body">
           <h4 class="card-title">{{ item.title }}</h4>
           <p class="card-text">{{ item.description }}</p>
-          <p class="preco">{{ item.value }}</p>
+          <p class="preco">{{ item.value | currency:'BRL':true }}</p>
           <a [routerLink]="['/offer', item.id]" class="btn btn-outline-primary">See offer</a>
         </div>
       </div>

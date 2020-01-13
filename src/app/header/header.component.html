@@ -15,7 +15,7 @@
             (keyup)="search(searchTerm.value)"
           />
           <ul class="list-group" style="position: absolute;">
-            <li class="list-group-item" *ngFor="let offer of arrayOffers">{{ offer.title }}</li>
+            <li class="list-group-item" *ngFor="let offer of arrayOffers">{{ offer.title | abbreviateDsc }}</li>
           </ul>
         </div>
         <div class="col-md-2">
