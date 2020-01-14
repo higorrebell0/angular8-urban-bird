@@ -1,7 +1,7 @@
 <div class="container">
   <div class="ordem-compra">
     <form>
-    
+
       <h5>Sua Compra</h5>
       <hr />
 
@@ -29,7 +29,7 @@
           29.90
         </div>
       </div>
-      
+
       <div class="form-row" style="background: #FAFAFA; padding: 20px; border-bottom: solid 1px #F0F0F0">
         <div class="form-group col-sm-1">
           <img src="/assets/ofertas/4/img1.jpg" class="img-fluid">
@@ -54,7 +54,7 @@
           31.90
         </div>
       </div>
-      
+
       <div class="form-row">
         <div class="form-group col d-flex justify-content-end">
           <h4>Total do pedido: 61.80</h4>
@@ -63,47 +63,80 @@
       <br />
 
 
-      <h5>Dados de entrega</h5>
+      <h5>Delivery Data</h5>
       <hr />
 
       <div class="form-row">
 
         <div class="form-group col-md-6">
-          <input type="text" class="form-control is-invalid" placeholder="Endereço" autocomplete="off" minlength="5" required>
-          <div class="invalid-feedback">Endereço inválido</div>
+          <input
+            type="text"
+            class="form-control {{ pristineAddress ? '' : (validAddress ? 'is-valid' : 'is-invalid') }}"
+            placeholder="Address"
+            autocomplete="off"
+            minlength="5"
+            required
+            #inputAddress
+            (input)="updateAddress(inputAddress.value)"
+          >
+          <div *ngIf="pristineAddress == false">
+            <div *ngIf="validAddress == false">
+              <div class="invalid-feedback text-danger">Invalid Address</div>
+            </div>
+          </div>
         </div>
 
         <div class="form-group col-md-2">
-          <input type="text" class="form-control is-valid" placeholder="Número" autocomplete="off" minlength="1" required>
+          <input
+            type="text"
+            class="form-control {{ pristineNumber ? '' : (validNumber ? 'is-valid' : 'is-invalid') }}"
+            placeholder="Nº"
+            autocomplete="off"
+            minlength="1"
+            required
+            #inputNumber
+            (input)="updateNumber(inputNumber.value)"
+          >
           <br />
           <small class="form-text text-muted">Ok</small>
         </div>
 
         <div class="form-group col-md-4">
-          <input type="text" class="form-control" placeholder="Complemento" autocomplete="off">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Complement"
+            autocomplete="off"
+            #inputComplement
+            (input)="updateComplement(inputComplement.value)"
+          >
         </div>
 
       </div>
       <br />
 
-      <h5>Dados de pagamento</h5>
+      <h5>Payment Data</h5>
       <hr />
 
       <div class="form-row">
-          
+
         <div class="form-group col-md-3">
-          <select class="form-control is-invalid">
-            <option>Selecione uma opção</option>
-            <option>Dinheiro</option>
-            <option>Débito</option>
+          <select
+            class="form-control {{ pristinePayment ? '' : (validPayment ? 'is-valid' : 'is-invalid') }}"
+            #selectPayment
+            (change)="updatePayment(selectPayment.value)"
+          >
+            <option value="">Select an Option</option>
+            <option value="money" selected="{{ paymentType == 'money' ? 'selected' : '' }}">Money</option>
+            <option value="debit" selected="{{ paymentType == 'debit' ? 'selected' : '' }}">Debit</option>
           </select>
 
-          <div class="invalid-feedback">Selecione uma forma de pagamento</div>
+          <div class="invalid-feedback">Select a Payment Method</div>
         </div>
       </div>
 
       <hr />
-      <button type="submit" class="btn btn-primary btn-lg">Cofirmar compra</button>
+      <button type="submit" class="btn btn-primary btn-lg" [disabled]="stateForm">Confirm Order</button>
     </form>
   </div>
 </div>
