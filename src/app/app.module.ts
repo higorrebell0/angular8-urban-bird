@@ -20,6 +20,7 @@ import { WhereComponent } from './offer/where/where.component';
 
 // pipes
 import { AbbreviateDescription } from '../app/util/abbreviate-desc.pipe';
+import { BuyOrderComponent } from './buy-order/buy-order.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AbbreviateDescription } from '../app/util/abbreviate-desc.pipe';
     OfferComponent,
     HowUseComponent,
     WhereComponent,
-    AbbreviateDescription
+    AbbreviateDescription,
+    BuyOrderComponent
   ],
   imports: [
     BrowserModule,

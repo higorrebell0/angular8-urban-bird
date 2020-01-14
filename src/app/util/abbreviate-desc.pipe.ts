@@ -4,8 +4,8 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'abbreviateDsc'
 })
 export class AbbreviateDescription implements PipeTransform {
-  transform(text: string): string {
-    if (text.length > 15) {
+  transform(text: string, paramIn: number): string {
+    if (text.length > paramIn) {
       return text.substr(0, 15) + '...';
     }
 

@@ -48,4 +48,8 @@ export class HeaderComponent implements OnInit {
     this.subjectSearch.next(searchString);
   }
 
+  public clearSearch(): void {
+    this.subjectSearch.next('');
+  }
+
 }

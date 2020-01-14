@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { OffersService } from '../../offers.service';
 
 @Component({
@@ -18,8 +18,10 @@ export class WhereComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.offersService.getWhereId(this.route.parent.snapshot.params.id)
+    this.route.parent.params.subscribe((params: Params) => {
+      this.offersService.getWhereId(params.id)
       .then((description: string) => { this.where = description; });
+    });
   }
 
 }
