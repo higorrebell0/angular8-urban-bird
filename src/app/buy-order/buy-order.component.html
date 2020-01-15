@@ -67,7 +67,6 @@
       <hr />
 
       <div class="form-row">
-
         <div class="form-group col-md-6">
           <input
             type="text"
@@ -111,15 +110,12 @@
             (input)="updateComplement(inputComplement.value)"
           >
         </div>
-
       </div>
       <br />
 
       <h5>Payment Data</h5>
       <hr />
-
       <div class="form-row">
-
         <div class="form-group col-md-3">
           <select
             class="form-control {{ pristinePayment ? '' : (validPayment ? 'is-valid' : 'is-invalid') }}"
@@ -130,13 +126,16 @@
             <option value="money" selected="{{ paymentType == 'money' ? 'selected' : '' }}">Money</option>
             <option value="debit" selected="{{ paymentType == 'debit' ? 'selected' : '' }}">Debit</option>
           </select>
-
           <div class="invalid-feedback">Select a Payment Method</div>
         </div>
       </div>
-
       <hr />
-      <button type="submit" class="btn btn-primary btn-lg" [disabled]="stateForm">Confirm Order</button>
+      <button
+        type="button"
+        class="btn btn-primary btn-lg"
+        [disabled]="stateForm"
+        (click)="confirmBuy()"
+      >Confirm Order</button>
     </form>
   </div>
 </div>

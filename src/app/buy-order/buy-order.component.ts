@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { BuyOrderService } from '../buy-order.service';
+import { Order } from '../shared/order.model';
 
 @Component({
   selector: 'app-buy-order',
   templateUrl: './buy-order.component.html',
-  styleUrls: ['./buy-order.component.css']
+  styleUrls: ['./buy-order.component.css'],
+  providers: [ BuyOrderService ]
 })
 export class BuyOrderComponent implements OnInit {
 
@@ -26,9 +29,20 @@ export class BuyOrderComponent implements OnInit {
 
   // button control
   public stateForm = 'disabled';
-  constructor() { }
+  constructor(private service: BuyOrderService) { }
 
   ngOnInit() {
+  }
+
+  public confirmBuy(): void {
+    const order: Order = new Order('', '', '', '');
+    order.address = this.address;
+    order.num = this.num;
+    order.complement = this.complement;
+    order.payment = this.paymentType;
+
+    this.service.completeBuy(order)
+      .subscribe();
   }
 
   public updateAddress(address: string): void {
