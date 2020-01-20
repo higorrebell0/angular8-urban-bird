@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="ordem-compra">
+  <div class="buy-order" *ngIf="idOrder === undefined">
     <form>
 
       <h5>Sua Compra</h5>
@@ -137,5 +137,9 @@
         (click)="confirmBuy()"
       >Confirm Order</button>
     </form>
+  </div>
+
+  <div class="buy-order" *ngIf="idOrder !== undefined">
+    <app-buy-order-success [idOrder]=idOrder></app-buy-order-success>
   </div>
 </div>

@@ -10,6 +10,8 @@ import { Order } from '../shared/order.model';
 })
 export class BuyOrderComponent implements OnInit {
 
+  public idOrder: number;
+
   public address = '';
   public num = '';
   public complement = '';
@@ -42,7 +44,9 @@ export class BuyOrderComponent implements OnInit {
     order.payment = this.paymentType;
 
     this.service.completeBuy(order)
-      .subscribe();
+      .subscribe((idOrder: number) => {
+        this.idOrder = idOrder;
+      });
   }
 
   public updateAddress(address: string): void {

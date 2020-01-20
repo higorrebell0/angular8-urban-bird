@@ -192,6 +192,27 @@
       "complement": "Casa",
       "payment": "money",
       "id": 1
+    },
+    {
+      "address": "Rua 10",
+      "num": "22",
+      "complement": "Casa",
+      "payment": "money",
+      "id": 2
+    },
+    {
+      "address": "Rua 10",
+      "num": "22",
+      "complement": "Casa",
+      "payment": "money",
+      "id": 3
+    },
+    {
+      "address": "Rua treta",
+      "num": "2",
+      "complement": "Casa",
+      "payment": "debit",
+      "id": 4
     }
   ]
 }
